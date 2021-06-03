@@ -112,11 +112,20 @@ export function eqTime(dateA, dateB) {
   )
 }
 
-export function isJustDate(date) {
+export function isJustDate(date, localizer) {
+  const utilSource =
+    localizer && localizer.localizedDateUtil
+      ? localizer.localizedDateUtil
+      : dates
+  const {
+    hours: getHours,
+    minutes: getMinutes,
+    seconds: getSeconds,
+  } = utilSource
   return (
-    dates.hours(date) === 0 &&
-    dates.minutes(date) === 0 &&
-    dates.seconds(date) === 0 &&
+    getHours(date) === 0 &&
+    getMinutes(date) === 0 &&
+    getSeconds(date) === 0 &&
     dates.milliseconds(date) === 0
   )
 }
